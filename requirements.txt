@@ -1,0 +1,22 @@
+# Cài bằng: pip install -r requirements.txt
+
+# Xử lý dữ liệu và vẽ biểu đồ
+pandas
+numpy
+matplotlib
+seaborn
+
+# Mô hình và đánh giá
+scikit-learn
+imbalanced-learn   # SMOTE (E2)
+xgboost
+lightgbm
+shap               # giải thích mô hình (E9)
+joblib             # lưu mô hình
+
+# Notebook
+jupyter
+ipykernel
+
+# Demo
+streamlit

@@ -1,0 +1,24 @@
+# ---- Dữ liệu: không đẩy lên Git (tải lại từ Kaggle hoặc chạy lại script làm sạch) ----
+data/**/*.csv
+data/**/*.parquet
+
+# ---- Mô hình đã huấn luyện (file lớn, tạo lại được) ----
+*.joblib
+*.pkl
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- Bí mật, file hệ thống, IDE ----
+.env
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
