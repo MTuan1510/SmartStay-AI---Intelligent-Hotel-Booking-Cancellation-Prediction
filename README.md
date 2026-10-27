@@ -1,10 +1,5 @@
 # Dự đoán hủy đặt phòng khách sạn
 
-<<<<<<< HEAD
-=======
-Bài tập lớn cuối kỳ môn Trí tuệ nhân tạo (BTL 18) · nhóm 4 người · 7 tuần.
-
->>>>>>> f47d559e8ef05851ce524dff7cec3aa8ea1e483b
 ## Đề tài
 
 Dự đoán một đơn đặt phòng có bị hủy hay không **tại thời điểm khách đặt**, dựa trên bộ dữ liệu Hotel Booking Demand (86.617 dòng sau làm sạch).
@@ -23,28 +18,6 @@ Dự đoán một đơn đặt phòng có bị hủy hay không **tại thời �
 
 Thư mục `data/` **không được đẩy lên Git** (xem `.gitignore`). Sau khi clone, tải bộ *Hotel booking demand* từ Kaggle, giải nén `hotel_bookings.csv` vào `data/raw/`, rồi chạy lại bước làm sạch bên dưới.
 
-<<<<<<< HEAD
-=======
-## Cách chạy
-
-```bash
-pip install -r requirements.txt
-
-# Làm sạch (script đặt ở src/clean_hotel_bookings.py)
-python src/clean_hotel_bookings.py data/raw/hotel_bookings.csv data/interim/hotel_bookings_clean.csv
-```
-
-Script ghi thêm cleaning log cạnh file sạch (`data/interim/hotel_bookings_clean_log.csv`); bản chính thức của nhóm nằm ở `reports/cleaning_log.csv`.
-
-Các bản dùng cho thực nghiệm so sánh (E3, E4):
-
-```bash
-python src/clean_hotel_bookings.py data/raw/hotel_bookings.csv data/interim/hotel_bookings_keepdup.csv --keep-duplicates
-python src/clean_hotel_bookings.py data/raw/hotel_bookings.csv data/interim/hotel_bookings_noadr.csv --drop-adr
-python src/clean_hotel_bookings.py data/raw/hotel_bookings.csv data/interim/hotel_bookings_withreq.csv --keep-special-requests
-```
-
->>>>>>> f47d559e8ef05851ce524dff7cec3aa8ea1e483b
 ## Quy ước làm việc
 
 - Thời điểm dự đoán là lúc đặt phòng, nên các cột chỉ biết sau đó (hoặc làm lộ đáp án) đã bị loại; lý do từng cột nằm trong cleaning log.
@@ -68,26 +41,4 @@ hotel-cancellation/
 └── reports/
     ├── figures/      # biểu đồ cho báo cáo
     └── cleaning_log.csv
-<<<<<<< HEAD
 ```
-=======
-```
-
-## Phân công
-
-| Phần việc | Thành viên |
-|---|---|
-| Dữ liệu và Pipeline: chia tập, tiền xử lý, các bản dữ liệu so sánh (E3, E4) | |
-| EDA và đánh giá: biểu đồ, E5, E6, phân tích lỗi, SHAP | |
-| Mô hình: baseline, mô hình chính, tinh chỉnh, mất cân bằng, hiệu chỉnh xác suất (E1, E2, E7) | |
-| Chi phí, demo và báo cáo: E8, app Streamlit, khung báo cáo, slide | |
-
-## Tiến độ
-
-- [x] Làm sạch dữ liệu và cleaning log
-- [ ] Chia ba tập theo thời gian
-- [ ] EDA trên tập huấn luyện
-- [ ] Pipeline tiền xử lý và baseline
-- [ ] Các mô hình chính và thực nghiệm E1-E9
-- [ ] App demo, báo cáo, slide
->>>>>>> f47d559e8ef05851ce524dff7cec3aa8ea1e483b
