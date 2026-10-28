@@ -7,7 +7,7 @@ Dự đoán một đơn đặt phòng có bị hủy hay không **tại thời �
 - **Câu hỏi chính:** nếu khách sạn dùng xác suất hủy để quyết định overbooking, thì ngưỡng nào làm tổng chi phí nhỏ nhất? (chi phí là giả định của nhóm, thử nhiều mức)
 - **Câu hỏi phụ:** mô hình còn đúng khi dữ liệu thay đổi theo thời gian không (tỷ lệ hủy tăng từ 24% lên 32%)? Các lựa chọn xử lý dữ liệu (dòng trùng, `adr`) ảnh hưởng bao nhiêu?
 
-## Dữ liệu
+## Dữ liệu 
 
 | Bản | Đường dẫn | Ghi chú |
 |---|---|---|
