@@ -7,7 +7,7 @@ matplotlib
 seaborn
 
 # Mô hình và đánh giá
-scikit-learn
+scikit-learn>=1.2
 imbalanced-learn   # SMOTE (E2)
 xgboost
 lightgbm
