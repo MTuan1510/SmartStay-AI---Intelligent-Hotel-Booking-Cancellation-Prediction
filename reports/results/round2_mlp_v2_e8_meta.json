@@ -1,0 +1,49 @@
+{
+  "model": "mlp_v2",
+  "split": "val",
+  "source_proba": "models/proba_val_mlp_v2.npy (load_proba, thu tu dong val.csv)",
+  "source_model": "models/mlp_v2.joblib (joblib.load)",
+  "n_val": 14400,
+  "n_proba": 14400,
+  "proba_mean": 0.15666306018829346,
+  "proba_min": 2.822901114996057e-05,
+  "proba_max": 0.9920627474784851,
+  "proba_valid_01": true,
+  "length_check_ok": true,
+  "model_vs_npy_check": true,
+  "max_abs_diff_model_vs_npy": 2.978208502035784e-08,
+  "order_note": "thu tu dong val.csv duoc duong bo boi save_proba va load_xy; do dai bang nhau khong chung minh thu tu",
+  "threshold_grid": {
+    "grid": "DEFAULT_THRESHOLDS = np.round(np.arange(0.01, 1.00, 0.01), 2)",
+    "n_thresholds": 99,
+    "min": 0.01,
+    "max": 0.99,
+    "tie_rule": "best_threshold -> curve['cost'].idxmin() => neu nhieu nguong cung chi phi, chon nguong THAP NHAT dau tien (luoi sap xep tang dan)"
+  },
+  "detail_r2": {
+    "model": "mlp_v2",
+    "split": "val",
+    "ratio": 2.0,
+    "c_walk": 2.0,
+    "c_empty": 1.0,
+    "t_theory": 0.6666666666666666,
+    "t_best": 0.43,
+    "FP": 240,
+    "FN": 3277,
+    "cost_best": 3757.0,
+    "cost_t0.5": 3816.0,
+    "cost_never": 4090.0,
+    "cost_always": 20620.0,
+    "saving_vs_never": 0.0814180929095355,
+    "gap_vs_theory": -0.23666666666666664
+  },
+  "r2_gate_passed": true,
+  "note": "Chi phep la GIA DINH cua nhom (src/cost.py), khong phai so lieu thap. Ket qua chi tren VAL (dung de chon mo hinh va nguong), KHONG la danh gia tren TEST. Khong mo tap test.",
+  "library_versions": {
+    "python": "3.11.2",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "joblib": "1.6.0",
+    "pandas": "3.1.1"
+  }
+}

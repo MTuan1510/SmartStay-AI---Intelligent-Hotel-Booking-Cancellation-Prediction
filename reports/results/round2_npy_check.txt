@@ -1,0 +1,11 @@
+python_version: 3.11.2
+sklearn_version: 1.9.1
+numpy_version: 2.4.6
+joblib_version: 1.6.0
+shape_reload: [14400]
+shape_npy: [14400]
+max_abs_diff_joblib_vs_npy: 2.978208502035784e-08
+giong_nguyen_goc_npy_vs_reload: True
+reload_pr_auc: 0.6312193858022317
+reload_roc_auc: 0.8130049160617436
+thu_tu_note: .npy luu theo thu tu dong val.csv (save_proba); khong su dung do dai de chung minh thu tu
