@@ -17,6 +17,10 @@ Các số dưới đây đều tính trên `train` và `val`; chưa ai mở `tes
 | `data/processed/val.csv` | sha256 `1fcbee5f639ac363bbbf155235d2cad45436d5e3dd7a73b1c1e422289c3485c1` |
 | `data/processed/test.csv` | sha256 `2cac5114304eb69a10b47f34881ded19dfbd5bbcb3d0a9ed107b438c100ae200` (chỉ băm file, chưa đọc nhãn) |
 | `models/Tung_mlp_v2.joblib` | sha256 `5090cbc6273c034ad4446a69b9f8e728217a6a956084de504ca248553759b970` |
+- Mã băm các mô hình khác (ghi trước khi tag):
+  - `models/logreg.joblib` sha256 `abd3ee39fbf5801dfcfb070131525bb46e245881b71346aa8196b24742048f47`
+  - `models/tree.joblib` sha256 `cd568c2a9815cd540c4989b347c9d4dc452927a14f8213c12044c91b06b3c29f`
+  - `models/lightgbm_smotenc.joblib` sha256 `5ac7db00fd8facd7cca3d11ffb94c886eda0523dfd2078818dce44a500f919c5`
 
 - Phiên bản thư viện tham chiếu (theo metadata E8 của N4): Python 3.11.2, scikit-learn 1.9.1, numpy 2.4.6, pandas 3.1.1, joblib 1.6.0. Phiên bản thực tế khi chạy được notebook tự ghi vào `reports/results/test_run_log.md`.
 - Notebook 07 tự đối chiếu mã băm với bảng trên; lệch thì dừng trước khi đọc test. Mã băm của file mô hình khác (logreg, tree, LightGBM) được ghi vào `test_run_log.md` khi chạy.
@@ -30,7 +34,7 @@ Mỗi mô hình dùng **đúng file đã huấn luyện trên train, không hu�
 | Mốc 1 | Dummy (hằng số = tỷ lệ hủy của train) | N1 | không có file | 0,284 | 0,500 | không dự đoán hủy |
 | Baseline | Logistic Regression, C = 0,1 | N1 | `models/logreg.joblib` | 0,573 | 0,784 | 0,67 |
 | Tham chiếu | Decision Tree, max_depth = 5, min_samples_leaf = 100 | N1 | `models/tree.joblib` | 0,508 | 0,767 | 0,60 |
-| So sánh | LightGBM + SMOTENC 0,75 | N3 | `models/lightgbm_smotenc.joblib` | 0,576 | 0,772 | theo `frozen_thresholds.csv` |
+| So sánh | LightGBM + SMOTENC 0,75 | N3 | `models/lightgbm_smotenc.joblib` | 0,575 | 0,771 | theo `frozen_thresholds.csv` |
 | **Mô hình chính** | **MLP v2** (32,16), alpha 1,0, lr 0,003, batch 256, seed 42 | N4 | `models/Tung_mlp_v2.joblib` | **0,631** | **0,813** | **0,43** (chi phí val 3.757) |
 
 Ghi chú:
@@ -39,6 +43,7 @@ Ghi chú:
 - Điểm val của MLP hơi lạc quan vì cấu hình được chọn trong 33 lần thử trên val, trong khi các mô hình khác được tinh chỉnh ít hơn. Seed 42 cũng là seed tốt nhất trong 5 seed (PR-AUC 0,616 đến 0,631, trung bình 0,622).
 - Bản LightGBM hiệu chỉnh E7 (fit lại trên phần train cũ) là một mô hình khác, **không** đưa lên test.
 - Không có mô hình nào ngoài bảng này được đưa lên test.
+- Bản `lightgbm_smotenc` được tái sinh trên máy nhóm trưởng (Windows, Python 3.14, lightgbm 4.7.0, imbalanced-learn 0.14.2, scikit-learn 1.9.1, numpy 2.5.3, pandas 3.0.6, joblib 1.6.0), lệch PR-AUC 0,0015 và ROC-AUC 0,0018 so với `nguoi3.csv` do khác nền tảng; chạy lặp lại cho cùng kết quả. Ngưỡng r = 2 là 0,58 (chi phí val 3.846), lấy từ `frozen_thresholds.csv`.
 
 ## 4. Phương án A (train-only)
 
