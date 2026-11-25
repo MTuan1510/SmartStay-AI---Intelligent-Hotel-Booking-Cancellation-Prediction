@@ -19,6 +19,8 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Ngoại lệ: mô hình nhẹ, được phép đưa lên Git
+# Ngoại lệ: mô hình cần cho bản demo (tổng khoảng 3 MB), được phép đưa lên Git
 !models/logreg.joblib
 !models/tree.joblib
+!models/Tung_mlp_v2.joblib
+!models/lightgbm_smotenc.joblib

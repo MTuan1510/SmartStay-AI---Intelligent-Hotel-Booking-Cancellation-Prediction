@@ -1,22 +1,49 @@
-# Cài bằng: pip install -r requirements.txt
+# # Cài bằng: pip install -r requirements.txt
+# Bản requirement cũ #
+# # Xử lý dữ liệu và vẽ biểu đồ
+# pandas
+# numpy
+# matplotlib
+# seaborn
+
+# # Mô hình và đánh giá
+# scikit-learn>=1.2
+# imbalanced-learn   # SMOTE (E2)
+# xgboost
+# lightgbm
+# shap               # giải thích mô hình (E9)
+# joblib             # lưu mô hình
+
+# # Notebook
+# jupyter
+# ipykernel
+
+# # Demo
+# streamlit
+
+# Bản mới
+# Phiên bản ghim lấy từ máy chạy chính thức (reports/results/test_run_log.md và final_protocol.md).
+# File mô hình .joblib lưu bằng scikit-learn 1.9.1: khác phiên bản có thể không tải được hoặc cho kết quả lệch.
+# Gói chưa ghim: chạy `pip freeze` trên máy đã chạy được rồi điền nốt.
 
 # Xử lý dữ liệu và vẽ biểu đồ
-pandas
-numpy
+pandas==3.0.6
+numpy==2.5.3
 matplotlib
 seaborn
 
 # Mô hình và đánh giá
-scikit-learn>=1.2
-imbalanced-learn   # SMOTE (E2)
+scikit-learn==1.9.1
+imbalanced-learn==0.14.2   # SMOTE (E2)
 xgboost
-lightgbm
+lightgbm==4.7.0
 shap               # giải thích mô hình (E9)
-joblib             # lưu mô hình
+joblib==1.6.0      # lưu mô hình
 
 # Notebook
 jupyter
 ipykernel
 
 # Demo
-streamlit
+streamlit>=1.50   # app dùng st.navigation và width="stretch"
+altair
