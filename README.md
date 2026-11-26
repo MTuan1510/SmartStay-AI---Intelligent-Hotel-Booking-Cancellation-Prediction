@@ -13,10 +13,22 @@ Dự đoán một đơn đặt phòng có bị hủy hay không **tại thời �
 |---|---|---|
 | Gốc | `data/raw/hotel_bookings.csv` | 119.390 dòng x 32 cột, **không bao giờ sửa** |
 | Đã làm sạch | `data/interim/hotel_bookings_clean.csv` | 86.617 dòng x 25 cột, tỷ lệ hủy 27,7% |
-| Ba tập chia theo thời gian | `data/processed/` | `train.csv`, `val.csv`, `test.csv` (chưa tạo) |
+| Ba tập chia theo thời gian | `data/processed/` | `train.csv`, `val.csv`, `test.csv` (đã tạo; `test.csv` chỉ dùng một lần ở bước đánh giá cuối, xem `reports/final_protocol.md`) |
 | Cleaning log | `reports/cleaning_log.csv` | 34 dòng: phát hiện, hành động, số dòng, lý do |
 
-Thư mục `data/` **không được đẩy lên Git** (xem `.gitignore`). Sau khi clone, tải bộ *Hotel booking demand* từ Kaggle, giải nén `hotel_bookings.csv` vào `data/raw/`, rồi chạy lại bước làm sạch bên dưới.
+Các file trong `data/` được lưu cùng repo (`.gitignore` không chặn thư mục này). Nếu clone về mà thiếu file, tải bộ *Hotel booking demand* từ Kaggle, giải nén `hotel_bookings.csv` vào `data/raw/`, rồi chạy lại bước làm sạch bên dưới.
+
+## Chạy bản demo
+
+```
+pip install -r requirements.txt
+python -m streamlit run app.py
+```
+
+- Cần Streamlit từ 1.50 trở lên (app dùng `st.navigation` và `width="stretch"`).
+- Cần các file sau có trong repo: `models/Tung_mlp_v2.joblib` (mô hình chính), `models/proba_val_*.npy`, `data/processed/train.csv`, `data/processed/val.csv` và `reports/results/*.csv`. Các file `models/lightgbm_smotenc.joblib`, `logreg.joblib`, `tree.joblib` dùng cho phần so sánh mô hình, thiếu thì phần đó bị bỏ qua. App báo rõ file nào còn thiếu.
+- File `.joblib` phụ thuộc phiên bản scikit-learn (1.9.1 trong `requirements.txt`), nên cài đúng phiên bản đã ghim.
+- App không đọc `data/processed/test.csv`; số liệu test lấy từ các file kết quả đã lưu trong `reports/results/`.
 
 ## Quy ước làm việc
 
@@ -32,13 +44,17 @@ hotel-cancellation/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
+├── app.py            # bản demo Streamlit
+├── .streamlit/       # theme của bản demo
 ├── data/
 │   ├── raw/          # file gốc
 │   ├── interim/      # file đã làm sạch và các bản so sánh
 │   └── processed/    # train / val / test
 ├── src/              # code dùng chung (Pipeline, mô hình, đánh giá, chi phí)
+├── models/           # mô hình đã huấn luyện (.joblib) và điểm dự đoán (.npy)
 ├── notebooks/        # EDA và các thực nghiệm E1-E9
 └── reports/
     ├── figures/      # biểu đồ cho báo cáo
+    ├── results/      # kết quả đánh giá (ngưỡng đã khóa, kết quả test)
     └── cleaning_log.csv
 ```
