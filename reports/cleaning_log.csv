@@ -1,0 +1,35 @@
+﻿Step,Column,Finding,Action,Rows,Why
+1,(toàn bộ),119390 dòng x 32 cột; tỉ lệ hủy 37.0%,"Đọc file gốc, không sửa file raw",119390,File raw giữ nguyên; mọi thay đổi đi qua script này nên chạy lại được từ đầu
+2,country,'CN' (1279 dòng) và 'CHN' (999 dòng) cùng chỉ Trung Quốc,Đổi 'CN' -> 'CHN',1279,Một quốc gia nhưng có hai mã (ISO-2 lẫn ISO-3); để nguyên thì mô hình coi là hai nước khác nhau
+3,country,"'TMP' (3 dòng) là mã cũ của Đông Timor, mã hiện hành là 'TLS'",Đổi 'TMP' -> 'TLS',3,Dùng mã hiện hành để nhất quán với phần còn lại của cột
+4,meal,'Undefined' (1169 dòng) và 'SC' cùng nghĩa: không kèm gói ăn,Gộp 'Undefined' vào 'SC',1169,Tài liệu mô tả bộ dữ liệu coi hai nhãn này là một; tách ra chỉ tạo thêm một nhóm trùng nghĩa
+5,(tất cả cột),31994 dòng trùng hoàn toàn; nhóm trùng hủy 63.1% so với 37.0% toàn bộ,Xóa dòng,31994,"Không có mã đặt phòng nên khóa kinh doanh là toàn bộ cột; dòng giống hệt có thể là bản ghi lặp (giữ bản đầu). Rủi ro: có thể là các đặt phòng thật khác nhau, nên có công tắc DROP_DUPLICATES để so sánh mô hình. Hệ quả: tỉ lệ hủy chung giảm"
+6,"adults, children, babies","Đặt phòng không có khách nào: 166 dòng, 9.6% bị hủy",Xóa dòng,166,Một đặt phòng không có người ở là phi logic; nhiều khả năng là bản ghi nhập sai
+7,"stays_in_weekend_nights, stays_in_week_nights","Đặt phòng có tổng số đêm = 0: 591 dòng, 3.9% bị hủy",Xóa dòng,591,"Lưu trú 0 đêm là phi logic; hầu hết không hủy nên nhiều khả năng là lỗi nhập hoặc ghé trong ngày, không phản ánh hành vi đặt/hủy cần dự đoán"
+8,market_segment,"Giá trị 'Undefined': 2 dòng, 100.0% bị hủy",Xóa dòng,2,Không xác định được nhóm; chỉ vài dòng (<0.01%) nên xóa không ảnh hưởng phân bố
+9,distribution_channel,"Giá trị 'Undefined': 3 dòng, 66.7% bị hủy",Xóa dòng,3,Không xác định được kênh; chỉ vài dòng (<0.01%) nên xóa không ảnh hưởng phân bố
+10,adr,"adr âm (min -6.38): 1 dòng, 0.0% bị hủy",Xóa dòng,1,"Giá phòng/đêm âm là giá trị bất khả (lỗi nhập hoặc điều chỉnh kế toán), không phải giá thật"
+11,adr,"adr > 1000 (max 5400): 1 dòng, 100.0% bị hủy",Xóa dòng,1,Gấp hơn 10 lần mức cao nhất còn lại (510); nhiều khả năng nhập thừa chữ số
+12,adults,"adults > 10 (max 55): 12 dòng, 100.0% bị hủy; 12 dòng customer_type=Group, adr=0 ở 12 dòng",Xóa dòng,12,"Có vẻ là giữ chỗ theo khối cho đoàn (không phải khách đơn lẻ), giá 0 và đều bị hủy; không đại diện cho hành vi đặt phòng thông thường"
+13,children,"children > 5: 1 dòng, 100.0% bị hủy",Xóa dòng,1,"Số lượng không thực tế cho một đặt phòng, nhiều khả năng nhập sai; chỉ vài dòng"
+14,babies,"babies > 5 (max 10): 2 dòng, 0.0% bị hủy",Xóa dòng,2,"Số em bé không thực tế cho một đặt phòng, nhiều khả năng nhập sai; chỉ vài dòng"
+15,adr,"adr = 0 ngoài nhóm Complementary: 420 dòng, 13.3% bị hủy; nhóm Complementary có adr=0: 620 dòng, 12.6% bị hủy; toàn bộ: 27.7% hủy",Giữ nguyên,420,"Tỉ lệ hủy gần với nhóm phòng tặng và thấp hơn nhiều mức chung, giống phòng miễn phí thật hơn là thiếu dữ liệu ngẫu nhiên; dữ liệu không đủ để khẳng định là thiếu nên không điền"
+16,"is_repeated_guest, previous_cancellations, previous_bookings_not_canceled","is_repeated_guest=0 nhưng có lịch sử đặt phòng: 1687 dòng, 58.0% bị hủy; is_repeated_guest=1 nhưng không có lịch sử: 269 dòng, 11.2% bị hủy",Giữ nguyên,1956,Không xác định được cột nào sai; xóa sẽ mất nhiều dòng và làm lệch tỉ lệ hủy (nhóm đầu hủy nhiều hơn mức chung). Các cột lịch sử vẫn giữ để mô hình tự dùng
+17,"adults, children, babies","adults = 0 nhưng có trẻ em/em bé: 219 dòng, 37.0% bị hủy",Giữ nguyên,219,Có thể là nhập thiếu người lớn hoặc trẻ ở cùng người lớn khác; chưa đủ cơ sở để coi là sai
+18,"babies, adults","babies > adults: 3 dòng, 33.3% bị hủy",Giữ nguyên,3,"Số dòng rất nhỏ; có thể là cặp song sinh/gia đình đông, không chắc là lỗi"
+19,lead_time,max 709 ngày; 561 dòng > 365 ngày (lệch phải),Giữ nguyên,561,"Đặt trước hơn một năm là có thể xảy ra và là tín hiệu thật; khi huấn luyện dùng RobustScaler hoặc mô hình cây, nếu cắt ngưỡng (winsorize) phải làm trong Pipeline, chỉ học trên tập train"
+20,"stays_in_weekend_nights, stays_in_week_nights",tổng đêm max 69; 364 dòng > 14 đêm,Giữ nguyên,364,Lưu trú dài là khả dĩ và hiếm; chưa có bằng chứng là lỗi nhập
+21,children,Dữ liệu gốc có 4 giá trị thiếu; sau các bước xóa dòng ở trên không còn dòng nào thiếu,Không cần điền,0,Các dòng thiếu đã bị loại ở các bước xóa phía trên; vẫn ép kiểu int ở bước cuối
+22,country,442 giá trị thiếu (0.5%); nhóm này hủy 6.6% so với 27.7% toàn bộ,Điền 'Unknown',442,Không có cơ sở điền một nước cụ thể; nhóm 'Unknown' giữ lại thông tin 'quốc gia không được ghi'. Điền hằng số nên không gây rò rỉ
+23,agent,"11948 giá trị thiếu (13.8%); kênh Direct chiếm 54.2% nhóm thiếu so với 8.5% nhóm có agent; thiếu: 12.8% hủy, có agent: 30.0% hủy",Điền 0 (quy ước: không qua đại lý),11948,"Thiếu liên quan rõ đến kênh đặt (nhiều khả năng không phải ngẫu nhiên) và hành vi hủy khác hẳn, nên giữ thành một nhóm riêng thay vì xóa hoặc điền trung vị. agent là mã định danh, khi huấn luyện phải mã hóa như biến phân loại"
+24,company,81447/86617 thiếu (94.0%),Thêm has_company (0/1) rồi xóa cột company,86617,Thiếu hơn 60% nên bỏ cột; giữ cột chỉ báo để còn dấu vết dòng nào có thông tin công ty
+25,reservation_status,Chỉ nhận 'Canceled'/'No-Show' khi is_canceled=1 (khớp 100.0%),Xóa cột,86617,Gần như là đáp án của nhãn; chỉ biết sau khi khách hủy hoặc nhận phòng
+26,reservation_status_date,Ngày của trạng thái cuối cùng,Xóa cột,86617,Chỉ biết sau khi hủy/nhận phòng
+27,assigned_room_type,Đổi phòng (khác reserved_room_type): hủy 4.8%; không đổi: 31.6%,Xóa cột,86617,Phòng thực tế thường chỉ được gán khi khách đến; tỉ lệ hủy rất khác nhau giữa hai nhóm cho thấy cột mang thông tin của kết quả
+28,booking_changes,0 lần sửa: hủy 30.3%; từ 1 lần: hủy 15.6%,Xóa cột,86617,"Là số lần sửa đặt phòng tính đến lúc nhận phòng hoặc lúc hủy, nên chỉ biết sau thời điểm đặt"
+29,required_car_parking_spaces,"Có yêu cầu chỗ đỗ xe: 7289 dòng, 0.0% bị hủy",Xóa cột,86617,"Tỉ lệ hủy đúng bằng 0 cho thấy cột này chỉ được ghi cho khách đã đến, là rò rỉ nhãn"
+30,total_of_special_requests,0 yêu cầu: hủy 33.5%; từ 3 yêu cầu: hủy 16.2%,Xóa cột (DROP_SPECIAL_REQUESTS=True),86617,Không xác định được thời điểm ghi nhận; khách hủy sớm cũng ít có cơ hội gửi thêm yêu cầu. Chọn thận trọng; dùng --keep-special-requests để chạy so sánh có/không
+31,adr,Cột vùng xám; trung bình nhóm hủy 117.8 so với 103.1 nhóm không hủy,Giữ nguyên,86617,"Giá thường đã biết từ lúc đặt. Nhóm hủy có giá cao hơn, không phải hướng mong đợi nếu giá bị đưa về 0 khi hủy; tuy vậy giá trong dữ liệu là giá cuối cùng nên cần ghi chú. Chạy so sánh có/không có adr bằng --drop-adr"
+32,days_in_waiting_list,99.0% dòng bằng 0,Giữ nguyên,86617,Xác định trước ngày lưu trú nên không rò rỉ; gần như không mang thông tin nhưng giữ cũng không hại
+33,arrival_date_week_number,Chỉ khớp số tuần ISO của ngày đến ở 44.7% dòng; quy tắc đánh số không xác định,Xóa cột,86617,"Thừa vì đã có năm, tháng, ngày đến; không rõ cách đánh số nên không dùng làm đặc trưng"
+34,"children, agent",children và agent đọc ra dạng số thực (float) vì có giá trị thiếu,Ép kiểu int,86617,Là số đếm và mã định danh nguyên

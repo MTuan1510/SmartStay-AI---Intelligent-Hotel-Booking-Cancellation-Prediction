@@ -1,0 +1,3 @@
+model,split,ratio,hotel,n,positive_rate,t_theory,t_best,gap_vs_theory,cost_best,cost_t0.5,cost_never,cost_always,saving_vs_never,fp,fn
+mlp_v2,val,2.0,City Hotel,9262.0,0.319261,0.667,0.43,-0.237,2732.0,2786.0,2957.0,12610.0,0.076091,170,2392
+mlp_v2,val,2.0,Resort Hotel,5138.0,0.220514,0.667,0.42,-0.247,1024.0,1030.0,1133.0,8010.0,0.096205,74,876

@@ -1,0 +1,27 @@
+# ---- Mô hình đã huấn luyện (file lớn, tạo lại được) ----
+*.joblib
+*.pkl
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- Bí mật, file hệ thống, IDE ----
+.env
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Ngoại lệ: mô hình cần cho bản demo (tổng khoảng 3 MB), được phép đưa lên Git
+!models/logreg.joblib
+!models/tree.joblib
+!models/Tung_mlp_v2.joblib
+!models/lightgbm_smotenc.joblib
+!models/rf_e1.joblib

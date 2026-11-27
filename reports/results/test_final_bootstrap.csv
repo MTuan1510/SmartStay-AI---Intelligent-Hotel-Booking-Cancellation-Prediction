@@ -1,0 +1,2 @@
+reference_model,note,n_boot_used,n_boot_skipped,diff_pr_auc,ci_pr_auc_lo,ci_pr_auc_hi,diff_roc_auc,ci_roc_auc_lo,ci_roc_auc_hi,frac_boot_a_better_pr,frac_boot_a_better_roc
+lightgbm_smotenc,so voi lightgbm_smotenc,2000,0,0.004912021153962831,-0.00028528374223252273,0.010175134430492812,0.008689703106440239,0.006031315883879484,0.011253554751347964,0.9655,1.0
